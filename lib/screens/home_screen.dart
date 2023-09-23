@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     String? cityName =
         await Geocoding.getCityName(position.latitude, position.longitude);
-
+    print(cityName);
     city = cityName;
   }
 
