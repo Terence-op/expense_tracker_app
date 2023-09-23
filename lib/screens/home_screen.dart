@@ -55,21 +55,22 @@ void addNewExpense(){
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DropdownButton<String>(
-
-              items: category.map((String dropDownStringItem){
-                return DropdownMenuItem<String>(
-                  value: dropDownStringItem,
-                  child: Text(dropDownStringItem),
-                );
-              }).toList(),
-              onChanged:(String? newValueSelected) {
-                setState(() {
-                  this.selecteditem = newValueSelected!;
-                });
-              },
-              value: selecteditem,
-                ),
+           StatefulBuilder(builder: (context, setState) {
+             return  DropdownButton<String>(
+               items: category.map((String dropDownStringItem){
+                 return DropdownMenuItem<String>(
+                   value: dropDownStringItem,
+                   child: Text(dropDownStringItem),
+                 );
+               }).toList(),
+               onChanged:(String? newValueSelected) {
+                 setState(() {
+                   this.selecteditem = newValueSelected!;
+                 });
+               },
+               value: selecteditem,
+             );
+           },),
             //amount
             TextField(
               keyboardType: TextInputType.number,
