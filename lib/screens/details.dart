@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
 
-class Details extends StatefulWidget {
-  const Details({Key? key}) : super(key: key);
+class Details extends StatelessWidget {
+  final String category;
+  final String amount;
+  final String des;
+  final DateTime dateTime;
+  const Details({
+    Key? key,
+    required this.amount,
+    required this.category,
+    required this.dateTime,
+    required this.des,
+  }) : super(key: key);
 
-  @override
-  State<Details> createState() => _DetailsState();
-}
-
-class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Details'),
+        title: const Text('Details'),
       ),
-      body: Center(child: Text(''),
+      body: Column(
+        children: [
+          Text(category),
+          Text(amount),
+          Text(des),
+          Text(dateTime.toIso8601String()),
+        ],
       ),
     );
   }
