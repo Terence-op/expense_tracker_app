@@ -19,9 +19,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>with TickerProviderStateMixin {
    var category = ['Food','Transport','Entertainment','Others'];
    var selecteditem = 'Food';
-
-  final newExpenseCategory = TextEditingController();
   final newExpenseAmount = TextEditingController();
+   final expense_description = TextEditingController();
   int _currentIndex = 0;
   TabController? tabController;
 
@@ -78,7 +77,18 @@ void addNewExpense(){
               keyboardType: TextInputType.number,
               controller: newExpenseAmount,
                 decoration: InputDecoration(
-                    hintText: 'Amount in ZMK',
+                  border:UnderlineInputBorder(),
+                    label: Text('Amount in ZMK',style: TextStyle(fontSize: 18)
+                    ),
+
+                )
+            ),
+            TextField(
+                keyboardType: TextInputType.text,
+                controller: expense_description,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Description',
                 )
             )
           ],
@@ -108,9 +118,9 @@ void addNewExpense(){
 
 void save(){
   //create Expense item
-  if(newExpenseCategory.text.isNotEmpty && newExpenseAmount.text.isNotEmpty){
+  if(selecteditem.isNotEmpty && newExpenseAmount.text.isNotEmpty){
     ExpenseItem newExpense = ExpenseItem(
-      category: newExpenseCategory.text, amount: newExpenseAmount.text, dateTime: DateTime.now(),
+      category: selecteditem, amount: newExpenseAmount.text, dateTime: DateTime.now(), description: expense_description.text,
     );
 
     Provider.of<ExpenseData>(context,listen: false).addNewExpense(newExpense);
@@ -128,8 +138,8 @@ void save(){
 
   // clear the controllers
   void clear(){
-  newExpenseCategory.clear();
   newExpenseAmount.clear();
+  expense_description.clear();
   }
   @override
   Widget build(BuildContext context) {

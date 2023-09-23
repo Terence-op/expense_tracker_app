@@ -21,6 +21,7 @@ void saveData(List<ExpenseItem>allExpense) async{
       expense.category,
       expense.amount,
       expense.dateTime,
+      expense.description,
     ];
     allExpensesFormatted.add(expensesFormatted);
   }
@@ -40,10 +41,14 @@ List<ExpenseItem>readData(){
     String category = savedExpenses[i][0];
     String amount = savedExpenses[i][1];
     DateTime dateTime = savedExpenses[i][2];
+    String Description = savedExpenses[i][3];
+
     ExpenseItem expense = ExpenseItem(
         category: category,
         amount: amount,
-        dateTime: dateTime);
+        dateTime: dateTime,
+      description: Description,
+    );
 
     //add expense to overall list of expenses
     allExpenses.add(expense);
