@@ -89,7 +89,7 @@ class ExpenseSummary extends StatelessWidget {
           child: Row(
             children: [
               const Text('Week Total:',style: TextStyle(fontWeight: FontWeight.bold),),
-              Text('\K${calculateWeekTotal(value, sunday, monday, tuesday, wednesday, thursday, friday, saturday)}'),
+              Text('${Provider.of<ExpenseData>(context,listen: false).setCurrency} ${calculateWeekTotal(value, sunday, monday, tuesday, wednesday, thursday, friday, saturday)}'),
             ],
           ),
         ),

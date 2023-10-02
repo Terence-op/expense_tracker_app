@@ -7,6 +7,11 @@ import 'package:provider/provider.dart';
 import '../models/expense_item.dart';
 
 class ExpenseData extends ChangeNotifier{
+  String setCurrency = 'ZMK';
+  void changeCurrency(String currency){
+    setCurrency = currency;
+    notifyListeners();
+  }
   //list of all expenses
    List<ExpenseItem>overallExpenseList=[];
   //get expense list

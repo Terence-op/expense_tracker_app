@@ -2,11 +2,15 @@ import 'package:expense_tracker/screens/details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
+
+import '../Data/expense_data.dart';
 
 class ExpenseTile extends StatelessWidget {
   final String category;
   final String amount;
   final String des;
+  final String city;
   final DateTime dateTime;
 
   void Function(BuildContext)? deleteTapped;
@@ -18,6 +22,7 @@ class ExpenseTile extends StatelessWidget {
     required this.des,
     required this.dateTime,
     required this.deleteTapped,
+  required this.city,
   });
 
   @override
@@ -46,6 +51,8 @@ class ExpenseTile extends StatelessWidget {
                 category: category,
                 dateTime: dateTime,
                 des: des,
+                cityName:city,
+
               ),
             ),
           );
@@ -53,7 +60,7 @@ class ExpenseTile extends StatelessWidget {
         title: Text(category),
         subtitle:
             Text('${dateTime.day} / ${dateTime.month} / ${dateTime.year}'),
-        trailing: Text('K' + amount),
+        trailing: Text('${Provider.of<ExpenseData>(context,listen: false).setCurrency}' + amount),
       ),
     );
   }

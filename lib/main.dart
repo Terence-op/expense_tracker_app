@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       create: (context)=>ExpenseData(),
       builder: (context,child)=> const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:  HomeScreen(),
+        home: SignInScreen(),
       )
 
     );

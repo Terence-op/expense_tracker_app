@@ -8,8 +8,7 @@ class Geocoding {
     var res = await http.get(
       Uri.parse(
           'https://api.api-ninjas.com/v1/reversegeocoding?lat=$lat&lon=$long'),
-      headers: {
-        'X-Api-Key': 'H0KAnycmHqNBfK5rJioHPA==pmqyLF8hMAQkM42V',
+      headers: {'X-Api-Key': 'H0KAnycmHqNBfK5rJioHPA==pmqyLF8hMAQkM42V'
       },
     );
     var data = json.decode(res.body);

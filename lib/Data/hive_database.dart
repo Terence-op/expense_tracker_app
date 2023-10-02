@@ -19,6 +19,7 @@ class HiveDataBase {
         expense.amount,
         expense.dateTime,
         expense.description,
+        expense.City,
       ];
       allExpensesFormatted.add(expensesFormatted);
     }
@@ -39,12 +40,15 @@ class HiveDataBase {
       String amount = savedExpenses[i][1];
       DateTime dateTime = savedExpenses[i][2];
       String Description = savedExpenses[i][3];
+      String City = savedExpenses[i][4];
 
       ExpenseItem expense = ExpenseItem(
         category: category,
         amount: amount,
         dateTime: dateTime,
         description: Description,
+        City: City,
+
       );
 
       //add expense to overall list of expenses

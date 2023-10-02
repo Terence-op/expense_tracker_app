@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
 
-import 'expense_form.dart';
+import 'expense_settings.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 controller: newExpenseAmount,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(),
-                  label: Text('Amount in ZMK', style: TextStyle(fontSize: 18)),
+                  label: Text('${Provider.of<ExpenseData>(context,listen: false).setCurrency}', style: TextStyle(fontSize: 18)),
                 )),
             TextField(
                 keyboardType: TextInputType.text,
@@ -133,6 +134,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         amount: newExpenseAmount.text,
         dateTime: DateTime.now(),
         description: expense_description.text,
+        City: city.toString(),
       );
 
       Provider.of<ExpenseData>(context, listen: false)
@@ -159,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Consumer<ExpenseData>(
         builder: (context, value, child) => Scaffold(
             backgroundColor: Colors.grey[300],
-            floatingActionButton: FloatingActionButton(
+            floatingActionButton: _currentIndex == 0 ? FloatingActionButton(
               onPressed: () {
                 getCurrentPosition();
                 //MyCustomFormState();
@@ -167,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               },
               child: Icon(Icons.add),
               backgroundColor: Colors.black,
-            ),
+            ):null,
             body: TabBarView(
               controller: tabController,
               children: [
@@ -182,14 +184,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     category: value.getAllExpenselist()[index].category,
                     amount: value.getAllExpenselist()[index].amount,
                     des: value.getAllExpenselist()[index].description,
-                    dateTime: DateTime.now(),
+                    city: value.getAllExpenselist()[index].City,
+                    dateTime: value.getAllExpenselist()[index].dateTime,
                     deleteTapped: ((p0) =>
                         deleteExpense(value.getAllExpenselist()[index])),
                   ),
                 ),
                 Statistis(),
 
-                Container(),
+                MySettings(),
               ],
             ),
             bottomNavigationBar: BottomNavigationBar(
